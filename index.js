@@ -75,6 +75,29 @@ class Client {
     });
   }
 
+  query(name, value, callback) {
+    if (!value) {
+      process.nextTick(() => {
+        callback(null, null);
+      });
+    }
+    const opts = {
+      uri: `/exists/${encodeURIComponent(name)}/values/${encodeURIComponent(value)}`,
+      method: 'GET'
+    };
+    this._request(opts, (err, res, body) => {
+      if (err) return callback(err);
+
+      if (res.statusCode % 400 < 100) {
+        callback(new SuppressionListError(body.error, res.statusCode));
+      } else if (res.statusCode === 200) {
+        callback(null, body)
+      } else {
+        callback(new SuppressionListError('Unknown response', res.statusCode));
+      }
+    });
+  }
+
   _request(options, callback) {
     const opts = {
       url: `${this.base.url}${options.uri}`,
@@ -94,6 +117,8 @@ class Client {
       opts.body = body;
       opts.headers['Content-Type'] = 'application/json';
     }
+
+    console.log("send", opts);
 
     request(opts, (err, res, body) => {
       if (err) return callback(err);
