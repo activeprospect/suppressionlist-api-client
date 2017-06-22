@@ -1,0 +1,27 @@
+{
+  "name": "suppressionlist",
+  "version": "0.0.0",
+  "description": "SuppressionList API client",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap --cov test/**/*-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/activeprospect/suppressionlist-api-client.git"
+  },
+  "author": "Alex Wolfe <alex@activeprospect.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/activeprospect/suppressionlist-api-client/issues"
+  },
+  "homepage": "https://github.com/activeprospect/suppressionlist-api-client#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "nock": "^9.0.13",
+    "tap": "^10.5.1"
+  }
+}
