@@ -3,9 +3,10 @@ const _       = require('lodash'),
 
 
 class SuppressionListError extends Error {
-  constructor(message, statusCode) {
+  constructor(message, statusCode, body) {
     super(message);
     this.statusCode = statusCode;
+    this.body = body;
   }
 }
 
@@ -33,7 +34,7 @@ class Client {
     this._request({ method: 'GET', uri: '/lists' }, (err, res, body) => {
       if (err) return callback(err);
       if (res.statusCode !== 200) {
-        return callback(new SuppressionListError('Could not fetch lists', res.statusCode));
+        return callback(new SuppressionListError('Could not fetch lists', res.statusCode, body));
       }
       callback(null, body);
     })
@@ -48,7 +49,7 @@ class Client {
     this._request({ method: 'POST', uri: '/lists', body: list }, (err, res, body) => {
       if (err) return callback(err);
       if (res.statusCode !== 201) {
-        return callback(new SuppressionListError('Could not create list', res.statusCode));
+        return callback(new SuppressionListError('Could not create list', res.statusCode, body));
       }
       callback(null, body);
     })
