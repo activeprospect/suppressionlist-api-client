@@ -60,11 +60,11 @@ class Client {
       callback = ttl;
       ttl = null;
     }
-    name = name.toLowerCase();
+    const lowerCaseName = name.toLowerCase();
     this.getLists((err, lists) => {
       if (err) return callback(err);
       const list = lists.find((list) => {
-        return list.name && list.name.toLowerCase() === name;
+        return list.name && list.name.toLowerCase() === lowerCaseName;
       });
       if (!list) {
         this.createList(name, ttl, callback)
