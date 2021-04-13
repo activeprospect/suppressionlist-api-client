@@ -17,7 +17,7 @@ class Client {
     if (env === 'production')
       baseUrl = 'https://app.suppressionlist.com';
     else if (env === 'staging')
-      baseUrl = 'http://staging.suppressionlist.com';
+      baseUrl = 'https://staging.suppressionlist.com';
     else
       baseUrl = 'http://suppressionlist.dev';
 
